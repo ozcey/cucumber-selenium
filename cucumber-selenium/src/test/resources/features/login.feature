@@ -3,11 +3,13 @@ Feature: Validating login functionality
 
   Scenario: Login into account with valid credentials
     Given User navigates to home page on the website
-    And User clicks on the login button on homepage
+    And User clicks on the login button on home page
+    Then User should be taken the successful login page
     And User enters a valid username
     And User enters a valid password
     When User clicks on the login button
-    Then User should be taken the successful login page
+    Then User should be taken the successful customer page
+
 #
   #@tag2
   #Scenario: Log out account
