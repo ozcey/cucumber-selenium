@@ -29,7 +29,6 @@ public class LoginStepDefs {
 	@And("^User clicks on the login button on home page$")
 	public void user_clicks_on_the_login_button_on_home_page() throws Throwable {
 		utils.findElement("//*[@id=\"navbarSupportedContent\"]/ul[2]/li[2]/a", Constants.CLICK, null);
-
 	}
 
 	@Then("^User should be taken the successful login page$")
@@ -46,7 +45,6 @@ public class LoginStepDefs {
 	@And("^User enters a valid password$")
 	public void user_enters_a_valid_password() throws Throwable {
 		utils.findElement("//*[@id=\"mat-input-1\"]", Constants.SEND_KEYS, "password");
-
 	}
 
 	@When("^User clicks on the login button$")
@@ -60,6 +58,35 @@ public class LoginStepDefs {
 		String xpath = "//*[@id=\"mat-tab-label-0-1\"]/div";
 		utils.waitUntil(xpath);
 		utils.validateText("Customer List", utils.getText(xpath));
+	}
+
+	@And("^User enters an invalid username (.+)$")
+	public void user_enters_an_invalid_username(String username) throws Throwable {
+		utils.findElement("//*[@id=\"mat-input-0\"]", Constants.SEND_KEYS, username);
+	}
+
+	@And("^User enters an invalid password (.+)$")
+	public void user_enters_an_invalid_password(String password) throws Throwable {
+		utils.findElement("//*[@id=\"mat-input-1\"]", Constants.SEND_KEYS, password);
+	}
+
+	@Then("^User gets an (.+) message following (.+)$")
+	public void user_gets_an_message_following(String error, String xpath) throws Throwable {
+		utils.waitUntil(xpath);
+		utils.validateText(error, utils.getText(xpath));
+	}
+
+	@And("^User clicks on the dropdwon menu on navbar$")
+	public void user_clicks_on_the_dropdwon_menu_on_navbar() throws Throwable {
+		String xpath = "//*[@id=\"navbarDropdown\"]";
+		utils.findElement(xpath, Constants.CLICK, null);
+	}
+
+	@When("^User clicks on the logout button$")
+	public void user_clicks_on_the_logout_button() throws Throwable {
+		String xpath = "//*[@id=\"navbarSupportedContent\"]/ul[2]/li[2]/div/a[2]";
+		utils.waitUntil(xpath);
+		utils.findElement(xpath, Constants.CLICK, null);
 	}
 
 }

@@ -1,6 +1,8 @@
 package bdd.cucumber_selenium.utils;
 
 import static org.junit.Assert.assertEquals;
+
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -49,6 +51,12 @@ public class Utils {
 	public void waitUntil(String xPath) {
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xPath)));
+	}
+
+	public void getAlert() {
+		Alert alert = driver.switchTo().alert();
+		String text = alert.getText();
+		System.out.println(text);
 	}
 
 }
