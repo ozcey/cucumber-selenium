@@ -1,5 +1,6 @@
 Feature: Validating login functionality
 
+  @run
   Scenario: I want to login into account with valid credentials
     Given User navigates to home page on the website
     And User clicks on the login button on home page

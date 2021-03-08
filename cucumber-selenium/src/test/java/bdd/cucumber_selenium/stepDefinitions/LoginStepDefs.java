@@ -2,7 +2,6 @@ package bdd.cucumber_selenium.stepDefinitions;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import bdd.cucumber_selenium.page_objects.LoginPage;
 import bdd.cucumber_selenium.page_objects.PageObjectManager;
 import bdd.cucumber_selenium.utils.Constants;
@@ -45,17 +44,17 @@ public class LoginStepDefs {
 	public void user_should_be_taken_the_successful_login_page() throws Throwable {
 		WebElement loginText = loginPage.getLoginText();
 		utils.waitUntil(loginText);
-		utils.validateText("Login", loginText.getText());
+		utils.validateText(Constants.LOGIN_TEXT.getName(), loginText.getText());
 	}
 
 	@And("^User enters a valid username$")
 	public void user_enters_a_valid_username() throws Throwable {
-		loginPage.enterUsername("markj@gmail.com");
+		loginPage.enterUsername(Constants.USERNAME.getName());
 	}
 
 	@And("^User enters a valid password$")
 	public void user_enters_a_valid_password() throws Throwable {
-		loginPage.enterPassword("password");
+		loginPage.enterPassword(Constants.PASSWORD.getName());
 	}
 
 	@When("^User clicks on the login button$")
@@ -67,7 +66,7 @@ public class LoginStepDefs {
 	public void user_should_be_taken_the_successful_customer_page() throws Throwable {
 		WebElement customerText = loginPage.getCustomerText();
 		utils.waitUntil(customerText);
-		utils.validateText("Customer List", customerText.getText());
+		utils.validateText(Constants.CUSTOMER_TEXT.getName(), customerText.getText());
 	}
 
 	@And("^User enters an invalid username (.+)$")

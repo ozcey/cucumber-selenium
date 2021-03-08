@@ -1,9 +1,16 @@
 package bdd.cucumber_selenium.utils;
 
-public class Constants {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-	public static final String CLICK = "click";
-	public static final String SEND_KEYS = "sendKeys";
-	public static final String GET_TEXT = "getText";
-	public static final String URL = "http://localhost:4200";
+@Getter
+@AllArgsConstructor
+public enum Constants {
+
+	LOGIN_TEXT("Login"), USERNAME("markj@gmail.com"), PASSWORD("password"), CUSTOMER_TEXT("Customer List"),
+	DRIVER("webdriver.chrome.driver"), DRIVER_PATH("F:\\PROGRAMMING\\SDET\\chromedriver_win32\\chromedriver.exe"),
+	BaseURL("http://localhost:4200");
+
+	private final String name;
+
 }
