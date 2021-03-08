@@ -1,5 +1,9 @@
 package bdd.cucumber_selenium.stepDefinitions;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import bdd.cucumber_selenium.page_objects.LoginPage;
+import bdd.cucumber_selenium.page_objects.PageObjectManager;
 import bdd.cucumber_selenium.utils.Constants;
 import bdd.cucumber_selenium.utils.Utils;
 import io.cucumber.java.After;
@@ -8,12 +12,16 @@ import io.cucumber.java.en.*;
 
 public class LoginStepDefs {
 
+	WebDriver driver;
 	Utils utils;
+	PageObjectManager pageObjectManager;
+	LoginPage loginPage;
 
 	@Before
 	public void before() {
-		utils = new Utils();
+		utils = new Utils(driver);
 		utils.setUp();
+		pageObjectManager = utils.getPageObjectManager();
 	}
 
 	@After
@@ -28,65 +36,66 @@ public class LoginStepDefs {
 
 	@And("^User clicks on the login button on home page$")
 	public void user_clicks_on_the_login_button_on_home_page() throws Throwable {
-		utils.findElement("//*[@id=\"navbarSupportedContent\"]/ul[2]/li[2]/a", Constants.CLICK, null);
+		loginPage = pageObjectManager.getLoginPage();
+		loginPage.clickLoginButton();
 	}
 
 	@Then("^User should be taken the successful login page$")
 	public void user_should_be_taken_the_successful_login_page() throws Throwable {
-		utils.validateText("Login",
-				utils.getText("/html/body/app-root/section/main/app-login/section/mat-card/mat-card-title"));
+		WebElement loginText = loginPage.getLoginText();
+		utils.waitUntil(loginText);
+		utils.validateText(Constants.LOGIN_TEXT.getName(), loginText.getText());
 	}
 
 	@And("^User enters a valid username$")
 	public void user_enters_a_valid_username() throws Throwable {
-		utils.findElement("//*[@id=\"mat-input-0\"]", Constants.SEND_KEYS, "markj@gmail.com");
+		loginPage.enterUsername(Constants.USERNAME.getName());
 	}
 
 	@And("^User enters a valid password$")
 	public void user_enters_a_valid_password() throws Throwable {
-		utils.findElement("//*[@id=\"mat-input-1\"]", Constants.SEND_KEYS, "password");
+		loginPage.enterPassword(Constants.PASSWORD.getName());
 	}
 
 	@When("^User clicks on the login button$")
 	public void user_clicks_on_the_login_button() throws Throwable {
-		utils.findElement("/html/body/app-root/section/main/app-login/section/mat-card/form/button", Constants.CLICK,
-				null);
+		loginPage.clickSubmitButton();
 	}
 
 	@Then("^User should be taken the successful customer page$")
 	public void user_should_be_taken_the_successful_customer_page() throws Throwable {
-		String xpath = "//*[@id=\"mat-tab-label-0-1\"]/div";
-		utils.waitUntil(xpath);
-		utils.validateText("Customer List", utils.getText(xpath));
+		WebElement customerText = loginPage.getCustomerText();
+		utils.waitUntil(customerText);
+		utils.validateText(Constants.CUSTOMER_TEXT.getName(), customerText.getText());
 	}
 
 	@And("^User enters an invalid username (.+)$")
 	public void user_enters_an_invalid_username(String username) throws Throwable {
-		utils.findElement("//*[@id=\"mat-input-0\"]", Constants.SEND_KEYS, username);
+		loginPage.enterUsername(username);
 	}
 
 	@And("^User enters an invalid password (.+)$")
 	public void user_enters_an_invalid_password(String password) throws Throwable {
-		utils.findElement("//*[@id=\"mat-input-1\"]", Constants.SEND_KEYS, password);
+		loginPage.enterPassword(password);
 	}
 
-	@Then("^User gets an (.+) message following (.+)$")
-	public void user_gets_an_message_following(String error, String xpath) throws Throwable {
-		utils.waitUntil(xpath);
-		utils.validateText(error, utils.getText(xpath));
+	@Then("^User gets an (.+) message$")
+	public void user_gets_an_message(String error) throws Throwable {
+		WebElement usernameErrorText = loginPage.getUsernameErrorText();
+		utils.waitUntil(usernameErrorText);
+		utils.validateText(error, usernameErrorText.getText());
 	}
 
 	@And("^User clicks on the dropdwon menu on navbar$")
 	public void user_clicks_on_the_dropdwon_menu_on_navbar() throws Throwable {
-		String xpath = "//*[@id=\"navbarDropdown\"]";
-		utils.findElement(xpath, Constants.CLICK, null);
+		loginPage.clickDropdownButton();
 	}
 
 	@When("^User clicks on the logout button$")
 	public void user_clicks_on_the_logout_button() throws Throwable {
-		String xpath = "//*[@id=\"navbarSupportedContent\"]/ul[2]/li[2]/div/a[2]";
-		utils.waitUntil(xpath);
-		utils.findElement(xpath, Constants.CLICK, null);
+		WebElement logoutButton = loginPage.getLogoutButton();
+		utils.waitUntil(logoutButton);
+		loginPage.clickLogoutButton();
 	}
 
 }

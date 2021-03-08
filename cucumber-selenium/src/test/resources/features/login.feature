@@ -1,6 +1,6 @@
-@run
 Feature: Validating login functionality
 
+  @run
   Scenario: I want to login into account with valid credentials
     Given User navigates to home page on the website
     And User clicks on the login button on home page
@@ -17,12 +17,12 @@ Feature: Validating login functionality
     And User enters an invalid username <username>
     And User enters an invalid password <password>
     When User clicks on the login button
-    Then User gets an <error> message following <xpath>
+    Then User gets an <error> message
 
     Examples: 
-      | username      | password | error                     | xpath                  |
-      | ""            |   123456 | Invalid or missing email! | //*[@id="mat-error-0"] |
-      | abc@gmail.com | ""       | Missing password!         | //*[@id="mat-error-1"] |
+      | username      | password | error                     |
+      | ""            |   123456 | Invalid or missing email! |
+      | abc@gmail.com | ""       | Missing password!         |
 
   Scenario: I wnat to log out account successfully
     Given User navigates to home page on the website
