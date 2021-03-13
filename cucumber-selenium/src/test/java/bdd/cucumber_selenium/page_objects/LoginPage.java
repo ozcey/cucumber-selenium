@@ -76,7 +76,7 @@ public class LoginPage {
 	public WebElement getPassowrdErrorText() {
 		return passwordError;
 	}
-	
+
 	public WebElement getLogoutButton() {
 		return logoutButton;
 	}

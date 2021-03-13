@@ -1,4 +1,4 @@
-package bdd.cucumber_selenium.stepDefinitions;
+package bdd.cucumber_selenium.step_definitions;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
