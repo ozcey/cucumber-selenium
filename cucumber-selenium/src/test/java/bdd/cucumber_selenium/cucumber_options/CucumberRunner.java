@@ -1,4 +1,4 @@
-package bdd.cucumber_selenium.cucumberOptions;
+package bdd.cucumber_selenium.cucumber_options;
 
 import org.junit.runner.RunWith;
 

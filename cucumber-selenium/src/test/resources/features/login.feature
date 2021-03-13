@@ -21,8 +21,8 @@ Feature: Validating login functionality
 
     Examples: 
       | username      | password | error                     |
-      | ""            |   123456 | Invalid or missing email! |
-      | abc@gmail.com | ""       | Missing password!         |
+      | "user123"     |   123456 | Invalid or missing email! |
+      | abc@gmail.com | "123456" | Missing password!         |
 
   Scenario: I wnat to log out account successfully
     Given User navigates to home page on the website
